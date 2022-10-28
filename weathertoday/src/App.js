@@ -102,12 +102,13 @@ function App() {
       query = form.country;
       // console.log("3");
     }
-    console.log(query);
-    // api to get location coordinates
-    const locationURL = `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${process.env.REACT_APP_API_KEY}`;
+    if (query.length > 0) {
+      // api to get location coordinates
+      const locationURL = `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${process.env.REACT_APP_API_KEY}`;
 
-    console.log(locationURL);
-    fetchCoordinates(locationURL);
+      console.log(locationURL);
+      fetchCoordinates(locationURL);
+    }
   };
   // default on load
   useEffect(() => {

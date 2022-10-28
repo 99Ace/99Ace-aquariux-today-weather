@@ -58,6 +58,10 @@ const Form = (props) => {
               className="btn btn-sm btn-dark"
               onClick={() => {
                 props.onSubmit(form);
+                setForm({
+                  city: "",
+                  country: "",
+                }git);
               }}
             >
               Search
