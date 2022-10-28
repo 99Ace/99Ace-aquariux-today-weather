@@ -31,6 +31,11 @@ const ShowHistory = (props) => {
                   <tr key={index}>
                     <td>{index + 1}</td>
                     <td>
+                      <img
+                        src={`https://countryflagsapi.com/png/${i.country}`}
+                        className="flag-icon me-1"
+                        alt="country flag"
+                      />
                       {i.name}, {i.country}
                     </td>
                     <td className="text-end">{i.time.slice(11)}</td>

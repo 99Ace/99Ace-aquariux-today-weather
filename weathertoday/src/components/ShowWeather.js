@@ -24,6 +24,11 @@ const ShowWeather = (props) => {
         <div className="col-12 col-md-7">
           <div className="weather-report ms-md-auto">
             <div className="text-muted">
+              <img
+                src={`https://countryflagsapi.com/png/${props.weatherReport.country}`}
+                className="flag-icon-main me-2"
+                alt="country flag"
+              />
               {props.weatherReport.name}, {props.weatherReport.country}
             </div>
             <h3>{props.weatherReport.main}</h3>
