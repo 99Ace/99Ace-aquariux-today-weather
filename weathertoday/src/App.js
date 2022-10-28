@@ -8,6 +8,7 @@ import useFetch from "./useFetch";
 
 // Styling
 import "./scss/style.scss";
+import { useState } from "react";
 
 function App() {
   // api to get location coordinates
@@ -15,14 +16,24 @@ function App() {
 
   const { data, isPending, error } = useFetch(locationURL);
 
+  const [weatherReport, setWeatherReport] = useState({
+    name: "-",
+    country: "-",
+    main: "-",
+    description: "-",
+    temp_min: "-",
+    temp_max: "-",
+    humidity: "-",
+    time: "-",
+    datetime: "-",
+  });
   return (
     <div>
       <h1 className="text-light">Today's Weather</h1>
       <div>
         <Form />
       </div>
-      <div>{data && <ShowWeather />}</div>
-      <div>{isPending && <div>Loading...</div>}</div>
+      <div>{data && <ShowWeather weatherReport={weatherReport} />}</div>
       <div>{error && <div>{error}</div>}</div>
       <div>
         <ShowHistory />
