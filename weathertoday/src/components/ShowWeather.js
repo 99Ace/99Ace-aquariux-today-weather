@@ -1,6 +1,6 @@
-import useFetch from "../useFetch";
-
 const ShowWeather = (props) => {
+  console.log(props);
+
   return (
     <section className="container">
       <h1>Show Weather</h1>
@@ -23,7 +23,8 @@ const ShowWeather = (props) => {
               <div className="col-5">Temperature</div>
               <div className="col-7">
                 {props.weatherReport.temp_min}&#8451; ~{" "}
-                {props.weatherReport.temp_max}&#8451;
+                {props.weatherReport.temp_max}
+                &#8451;
               </div>
             </div>
           </div>
@@ -38,7 +39,7 @@ const ShowWeather = (props) => {
           <div className="col-12">
             <div className="row">
               <div className="col-5">Time</div>
-              <div className="col-7">{props.weatherReport.datetime}</div>
+              <div className="col-7">{props.weatherReport.time}</div>
             </div>
           </div>
         </div>
