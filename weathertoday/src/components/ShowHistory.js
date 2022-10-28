@@ -29,16 +29,27 @@ const ShowHistory = (props) => {
               props.history.map((i, index) => {
                 return (
                   <tr key={index}>
-                    <td scope="row">{index + 1}</td>
+                    <td>{index + 1}</td>
                     <td>
                       {i.name}, {i.country}
                     </td>
                     <td className="text-end">{i.time.slice(11)}</td>
                     <td className="text-end">
-                      <button className="btn btn-sm">
+                      <button
+                        className="btn btn-sm"
+                        onClick={() => {
+                          const url = `https://api.openweathermap.org/data/2.5/weather?q=${i.name}&appid=${process.env.REACT_APP_API_KEY}&units=metric`;
+                          props.fetchWeather(url);
+                        }}
+                      >
                         <i className="fa-solid fa-magnifying-glass"></i>
                       </button>
-                      <button className="btn btn-sm">
+                      <button
+                        className="btn btn-sm"
+                        onClick={() => {
+                          props.removeHistory(index);
+                        }}
+                      >
                         <i className="fa-solid fa-trash-can"></i>
                       </button>
                     </td>

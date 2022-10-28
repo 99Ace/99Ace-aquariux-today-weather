@@ -1,3 +1,6 @@
+// packages
+import { ReactSession } from "react-client-session";
+
 // Components
 import Form from "./components/Form";
 import ShowHistory from "./components/ShowHistory";
@@ -8,8 +11,11 @@ import "./scss/style.scss";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+ReactSession.setStoreType("localStorage");
+
 function App() {
   const [record, setRecord] = useState({
+    username: null,
     weatherReport: {
       name: "-",
       country: "-",
@@ -23,7 +29,6 @@ function App() {
     searchHistory: [],
     form: { city: "", country: "" },
   });
-  const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(null);
 
   // fetch data
@@ -34,33 +39,63 @@ function App() {
         .then((response) => {
           const w = response.data;
 
-          var newSearchHistory = [];
-          init
-            ? (newSearchHistory = [...record.searchHistory])
-            : (newSearchHistory = [
-                ...record.searchHistory,
-                {
-                  name: w.name,
-                  country: w.sys.country,
-                  time: getCurrentDate(),
-                },
-              ]);
-          // save the weather and history
-          setRecord({
-            ...record,
-            weatherReport: {
-              name: w.name,
-              country: w.sys.country,
-              main: w.weather[0].main,
-              description: w.weather[0].description,
-              temp_min: w.main.temp_min,
-              temp_max: w.main.temp_max,
-              humidity: w.main.humidity,
-              time: getCurrentDate(),
-            },
-            searchHistory: newSearchHistory,
-          });
-          setIsPending(false);
+          // if user not initialise
+          if (!record.username) {
+            const userData = ReactSession.get("userData");
+            console.log("retrieve==>", userData);
+            // save the weather + history from session
+            setRecord({
+              ...record,
+              username: userData.username,
+              weatherReport: {
+                name: w.name,
+                country: w.sys.country,
+                main: w.weather[0].main,
+                description: w.weather[0].description,
+                temp_min: w.main.temp_min,
+                temp_max: w.main.temp_max,
+                humidity: w.main.humidity,
+                time: getCurrentDate(),
+              },
+              searchHistory: userData.searchHistory,
+            });
+          } else {
+            // create a copy of the search result
+            var newSearchHistory = [];
+            init
+              ? (newSearchHistory = [...record.searchHistory])
+              : (newSearchHistory = [
+                  ...record.searchHistory,
+                  {
+                    name: w.name,
+                    country: w.sys.country,
+                    time: getCurrentDate(),
+                  },
+                ]);
+
+            // save the weather and history
+            setRecord({
+              ...record,
+              weatherReport: {
+                name: w.name,
+                country: w.sys.country,
+                main: w.weather[0].main,
+                description: w.weather[0].description,
+                temp_min: w.main.temp_min,
+                temp_max: w.main.temp_max,
+                humidity: w.main.humidity,
+                time: getCurrentDate(),
+              },
+              searchHistory: newSearchHistory,
+            });
+            // save to session
+            const userData = {
+              username: record.username,
+              searchHistory: newSearchHistory,
+            };
+            console.log("Added new history=>", userData);
+            ReactSession.set("userData", userData);
+          }
         })
         .catch((error) => {
           throw error;
@@ -101,18 +136,53 @@ function App() {
       ...record,
       searchHistory: [],
     });
+    // save to session
+    const userData = {
+      username: record.username,
+      searchHistory: [],
+    };
+    ReactSession.set("userData", userData);
   };
+  const removeHistory = (index) => {
+    console.log(index);
+    const modifiedSearchHistory = [
+      ...record.searchHistory.slice(0, index),
+      ...record.searchHistory.slice(index + 1),
+    ];
+    setRecord({
+      ...record,
+      searchHistory: modifiedSearchHistory,
+    });
+  };
+
   // default on load
   useEffect(() => {
     const query = "singapore";
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${process.env.REACT_APP_API_KEY}&units=metric`;
+    var userData = ReactSession.get("userData");
+    console.log(userData);
+    if (!userData) {
+      userData = {
+        username: "Alexander",
+        searchHistory: [],
+      };
+      ReactSession.set("userData", userData);
+    }
+    console.log(userData);
+
     fetchWeather(url, true);
   }, []);
 
   return (
     <div>
-      <div className="top-banner p-3">
-        <strong>weatherToday</strong>
+      <div className="top-banner p-3 d-flex align-item-center">
+        <strong>
+          WeatherT<i className="fa-solid fa-sun"></i>day
+        </strong>
+        <div className="ms-auto">
+          <span>{record.username}</span>
+          <i className="fa-solid fa-user ms-2"></i>
+        </div>
       </div>
       <div>
         <Form onSubmit={onSubmit} />
@@ -127,6 +197,8 @@ function App() {
         <ShowHistory
           history={record.searchHistory}
           clearHistory={clearHistory}
+          removeHistory={removeHistory}
+          fetchWeather={fetchWeather}
         />
       </div>
     </div>
