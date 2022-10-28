@@ -96,6 +96,12 @@ function App() {
     }
   };
 
+  const clearHistory = () => {
+    setRecord({
+      ...record,
+      searchHistory: [],
+    });
+  };
   // default on load
   useEffect(() => {
     const query = "singapore";
@@ -105,7 +111,9 @@ function App() {
 
   return (
     <div>
-      <h1 className="text-light">Today's Weather</h1>
+      <div className="top-banner p-3">
+        <strong>weatherToday</strong>
+      </div>
       <div>
         <Form onSubmit={onSubmit} />
       </div>
@@ -116,7 +124,10 @@ function App() {
       <div>{<ShowWeather weatherReport={record.weatherReport} />}</div>
 
       <div>
-        <ShowHistory />
+        <ShowHistory
+          history={record.searchHistory}
+          clearHistory={clearHistory}
+        />
       </div>
     </div>
   );

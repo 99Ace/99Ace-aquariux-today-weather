@@ -1,6 +1,54 @@
-const ShowHistory = () => {
+const ShowHistory = (props) => {
   return (
     <>
+      <section id="weather-history" className="container">
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col" colSpan="3">
+                <strong>Search History</strong>
+              </th>
+              <th className="text-end">
+                <button
+                  className="badge bg-muted border-0 text-secondary"
+                  onClick={props.clearHistory}
+                >
+                  clear history
+                </button>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {props.history.length === 0 ? (
+              <tr>
+                <td colSpan={4} className="text-center">
+                  <em>-- No records --</em>
+                </td>
+              </tr>
+            ) : (
+              props.history.map((i, index) => {
+                return (
+                  <tr key={index}>
+                    <td scope="row">{index + 1}</td>
+                    <td>
+                      {i.name}, {i.country}
+                    </td>
+                    <td className="text-end">{i.time.slice(11)}</td>
+                    <td className="text-end">
+                      <button className="btn btn-sm">
+                        <i className="fa-solid fa-magnifying-glass"></i>
+                      </button>
+                      <button className="btn btn-sm">
+                        <i className="fa-solid fa-trash-can"></i>
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })
+            )}
+          </tbody>
+        </table>
+      </section>
       <h1>Show History</h1>
     </>
   );

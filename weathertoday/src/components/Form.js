@@ -13,59 +13,66 @@ const Form = (props) => {
     });
   };
   return (
-    <div className="container">
-      <div>
-        <div className="row">
-          <div className="col-12 col-md 4">
-            <div className="input-group input-group mb-2">
-              <span className="input-group-text" id="cityInput">
-                City
-              </span>
-              <input
-                type="text"
-                name="city"
-                className="form-control"
-                aria-label="cityInput"
-                aria-describedby="cityInput"
-                onChange={updateFormField}
-                value={form.city}
-                placeholder="city (e.g Johor)"
-              />
-            </div>
+    <div id="weather-search" className="container p-3">
+      <div className="weather-form">
+        {/* input fields */}
+        <div className="d-flex justify-content-evenly gap-2">
+          <div className="input-group mb-3">
+            <span className="input-group-text" id="city">
+              City
+            </span>
+            <input
+              type="text"
+              className="form-control"
+              name="city"
+              placeholder="city (e.g Hanoi)"
+              aria-label="city-input"
+              aria-describedby="city"
+              onChange={updateFormField}
+              value={form.city}
+            />
           </div>
-          <div className="col-12 col-md 4">
-            <div className="input-group input-group mb-2">
-              <span className="input-group-text" id="countryInput">
-                Country
-              </span>
-              <input
-                type="text"
-                name="country"
-                className="form-control"
-                aria-label="countryInput"
-                aria-describedby="countryInput"
-                onChange={updateFormField}
-                value={form.country}
-                placeholder="city (e.g Malaysia)"
-              />
-            </div>
-          </div>
-          <div className="col-12 col-md 4">
-            <button
-              className="btn btn-sm btn-dark"
-              onClick={() => {
-                props.onSubmit(form);
-                setForm({
-                  city: "",
-                  country: "",
-                });
-              }}
-            >
-              Search
-            </button>
-            <button className="btn btn-sm btn-light ms-2">Clear</button>
+          <div className="input-group mb-3">
+            <span className="input-group-text" id="country">
+              Country
+            </span>
+            <input
+              type="text"
+              className="form-control"
+              name="country"
+              placeholder="country (e.g Vietnam)"
+              aria-label="country-input"
+              aria-describedby="country"
+              onChange={updateFormField}
+              value={form.country}
+            />
           </div>
         </div>
+
+        {/* buttons */}
+        <button
+          className="btn btn-sm btn-dark"
+          onClick={() => {
+            props.onSubmit(form);
+            setForm({
+              city: "",
+              country: "",
+            });
+          }}
+        >
+          Search
+        </button>
+        <button
+          className="btn btn-sm btn-light ms-2"
+          onClick={() => {
+            setForm({
+              city: "",
+              country: "",
+            });
+          }}
+        >
+          Clear
+        </button>
       </div>
     </div>
   );

@@ -1,6 +1,14 @@
 @import "./node_modules/bootstrap/scss/bootstrap";
 $myColor: rgb(137, 237, 236);
 
-body {
-  background-color: $myColor;
+.top-banner {
+  background-color: turquoise;
+}
+
+.weather-icon {
+  font-size: 6rem;
+}
+
+.weather-report {
+  width: fit-content;
 }
