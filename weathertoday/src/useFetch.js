@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { AxiosResponse, AxiosError } from "axios";
 
 const useFetch = (url) => {
   // Set up state for data
@@ -14,6 +13,7 @@ const useFetch = (url) => {
         await axios
           .get(url)
           .then((response) => {
+            console.log(response.data);
             setData(response.data);
             setIsPending(false);
           })

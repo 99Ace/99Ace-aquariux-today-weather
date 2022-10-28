@@ -10,12 +10,10 @@ import useFetch from "./useFetch";
 import "./scss/style.scss";
 
 function App() {
-  const locationURL = `http://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid={${process.env.REACT_APP_API_KEY}}"`;
+  // api to get location coordinates
+  const locationURL = `https://api.openweathermap.org/geo/1.0/direct?q=johor_bahru&limit=1&appid=${process.env.REACT_APP_API_KEY}`;
 
-  // temp use of api as openweather api not ready
-  const testURL = "https://api.data.gov.sg/v1/environment/air-temperature";
-
-  const { data, isPending, error } = useFetch(testURL);
+  const { data, isPending, error } = useFetch(locationURL);
 
   return (
     <div>
@@ -23,7 +21,7 @@ function App() {
       <div>
         <Form />
       </div>
-      <div>{data && <ShowWeather data={data} />}</div>
+      <div>{data && <ShowWeather />}</div>
       <div>{isPending && <div>Loading...</div>}</div>
       <div>{error && <div>{error}</div>}</div>
       <div>
