@@ -3,16 +3,13 @@ import Form from "./components/Form";
 import ShowHistory from "./components/ShowHistory";
 import ShowWeather from "./components/ShowWeather";
 
-// Custom hook
-import useFetch from "./useFetch";
-
 // Styling
 import "./scss/style.scss";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
 function App() {
-  const [data, setData] = useState({
+  const [record, setRecord] = useState({
     weatherReport: {
       name: "-",
       country: "-",
@@ -23,22 +20,34 @@ function App() {
       humidity: "-",
       time: "-",
     },
-    history: [],
+    searchHistory: [],
     form: { city: "", country: "" },
-    isPending: true,
-    error: null,
   });
-  const [coordinates, setCoordinates] = useState(null);
+  const [isPending, setIsPending] = useState(true);
+  const [error, setError] = useState(null);
+
   // fetch data
-  const fetchWeather = async (url) => {
+  const fetchWeather = async (url, init = false) => {
     try {
       await axios
         .get(url)
         .then((response) => {
           const w = response.data;
-          console.log("weather =>", response.data);
-          setData({
-            ...data,
+
+          var newSearchHistory = [];
+          init
+            ? (newSearchHistory = [...record.searchHistory])
+            : (newSearchHistory = [
+                ...record.searchHistory,
+                {
+                  name: w.name,
+                  country: w.sys.country,
+                  time: getCurrentDate(),
+                },
+              ]);
+          // save the weather and history
+          setRecord({
+            ...record,
             weatherReport: {
               name: w.name,
               country: w.sys.country,
@@ -47,42 +56,22 @@ function App() {
               temp_min: w.main.temp_min,
               temp_max: w.main.temp_max,
               humidity: w.main.humidity,
-              time: getDate(),
+              time: getCurrentDate(),
             },
-            isPending: false,
+            searchHistory: newSearchHistory,
           });
+          setIsPending(false);
         })
         .catch((error) => {
           throw error;
         });
     } catch (e) {
-      // setError(e.toJSON().message);
+      setError(e.toJSON().message);
     }
   };
-  const fetchCoordinates = async (url) => {
-    try {
-      await axios
-        .get(url)
-        .then((response) => {
-          console.log(response.data);
-          const query = {
-            lat: response.data[0].lat,
-            lng: response.data[0].lon,
-          };
-          console.log(query);
-          const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${query.lat}&lon=${query.lng}&units=metric&appid=${process.env.REACT_APP_API_KEY}`;
-          console.log(weatherUrl);
-          fetchWeather(weatherUrl);
-        })
-        .catch((error) => {
-          throw error;
-        });
-    } catch (e) {
-      // setError(e.toJSON().message);
-    }
-  };
+
   // get current time
-  const getDate = () => {
+  const getCurrentDate = () => {
     var today = new Date();
     today = today.toLocaleString("en-US");
     today = today.replace(/\//g, "-");
@@ -91,30 +80,27 @@ function App() {
 
   const onSubmit = (form) => {
     console.log("submitted", form);
+    // set query including city and country
     var query = "";
     if (form.city.length > 0 && form.country.length > 0) {
       query = `${form.city},${form.country}`;
-      // console.log("1");
     } else if (form.city.length > 0) {
       query = form.city;
-      // console.log("2", form.city);
     } else {
       query = form.country;
-      // console.log("3");
     }
+    // process only if the there is content in both city and country
     if (query.length > 0) {
-      // api to get location coordinates
-      const locationURL = `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${process.env.REACT_APP_API_KEY}`;
-
-      console.log(locationURL);
-      fetchCoordinates(locationURL);
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${process.env.REACT_APP_API_KEY}&units=metric`;
+      fetchWeather(url);
     }
   };
+
   // default on load
   useEffect(() => {
-    const query = { lat: 1.2899175, lng: 103.8519072 };
-    const defaultUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${query.lat}&lon=${query.lng}&units=metric&appid=${process.env.REACT_APP_API_KEY}`;
-    fetchWeather(defaultUrl);
+    const query = "singapore";
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${process.env.REACT_APP_API_KEY}&units=metric`;
+    fetchWeather(url, true);
   }, []);
 
   return (
@@ -123,7 +109,12 @@ function App() {
       <div>
         <Form onSubmit={onSubmit} />
       </div>
-      <div>{<ShowWeather weatherReport={data.weatherReport} />}</div>
+      {/* Error message
+      <div>
+        {error && <span className="text-danger fst-italic">{error}</span>}
+      </div> */}
+      <div>{<ShowWeather weatherReport={record.weatherReport} />}</div>
+
       <div>
         <ShowHistory />
       </div>

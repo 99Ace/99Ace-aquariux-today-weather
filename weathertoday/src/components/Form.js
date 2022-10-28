@@ -1,8 +1,5 @@
 import { useState } from "react";
 
-// custom hook
-import useFetch from "../useFetch";
-
 const Form = (props) => {
   const [form, setForm] = useState({
     city: "",
@@ -61,7 +58,7 @@ const Form = (props) => {
                 setForm({
                   city: "",
                   country: "",
-                }git);
+                });
               }}
             >
               Search
