@@ -12,11 +12,20 @@ const Form = (props) => {
       [e.target.name]: e.target.value,
     });
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    props.onSubmit(form);
+    setForm({
+      city: "",
+      country: "",
+    });
+  };
   return (
     <div id="weather-search" className="container p-2">
-      <div className="weather-form border">
+      <form className="weather-form border" onSubmit={handleSubmit}>
         {/* input fields */}
         <div className="d-md-flex justify-content-evenly gap-2">
+          {/* Input : City */}
           <div className="input-group mb-3">
             <span className="input-group-text" id="city">
               City
@@ -32,6 +41,7 @@ const Form = (props) => {
               value={form.city}
             />
           </div>
+          {/* Input : Country */}
           <div className="input-group mb-3">
             <span className="input-group-text" id="country">
               Country
@@ -50,19 +60,8 @@ const Form = (props) => {
         </div>
 
         {/* buttons */}
-        <button
-          className="btn btn-sm btn-dark"
-          onClick={() => {
-            props.onSubmit(form);
-            setForm({
-              city: "",
-              country: "",
-            });
-          }}
-        >
-          Search
-        </button>
-        <button
+        <button className="btn btn-sm btn-dark">Search</button>
+        <div
           className="btn btn-sm btn-light ms-2"
           onClick={() => {
             setForm({
@@ -72,8 +71,8 @@ const Form = (props) => {
           }}
         >
           Clear
-        </button>
-      </div>
+        </div>
+      </form>
     </div>
   );
 };
