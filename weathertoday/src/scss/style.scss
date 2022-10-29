@@ -5,7 +5,7 @@
 
 // Common styling
 .bg-color-1 {
-  background-color: $myColor;
+  background-color: $base-color-1;
 }
 
 .btn {
@@ -18,7 +18,9 @@
   margin: 0 auto;
 }
 
-
+.ht-hide {
+  height: 450px !important;
+}
 
 // Weather Display Section
 #weather-content {
@@ -84,8 +86,10 @@
 
 // Search History Display Section
 #weather-history {
-  min-height: 20vh;
   padding-bottom: $base-height * 3;
+  height: 250px;
+  overflow: hidden;
+  overflow-y: scroll;
 
   .flag-icon {
     height: $base-height * 1.25;
@@ -97,6 +101,13 @@
     .fs-time {
       font-size: $base-font-size * 0.8;
     }
+
+    thead {
+      top: 0;
+      position: sticky;
+      background-color: white;
+    }
+
   }
 }
 
@@ -123,6 +134,8 @@ footer {
 
   // Search History Display Section
   #weather-history {
+    height: 450px;
+
     .table {
       font-size: $base-font-size;
     }

@@ -1,7 +1,10 @@
 const ShowHistory = (props) => {
   return (
     <>
-      <section id="weather-history" className="container">
+      <section
+        id="weather-history"
+        className={props.tracker ? "container" : "ht-hidecontainer"}
+      >
         <table className="table">
           <thead>
             <tr>
@@ -38,7 +41,9 @@ const ShowHistory = (props) => {
                       />
                       {i.name}, {i.country}
                     </td>
-                    <td className="text-end fs-time">{i.time.slice(11)}</td>
+                    <td className="text-end fs-time">
+                      {i.time.slice(11, 14) + i.time.slice(17)}
+                    </td>
                     <td className="text-end">
                       <button
                         className="btn btn-sm"

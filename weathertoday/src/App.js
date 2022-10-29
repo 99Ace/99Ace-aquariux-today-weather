@@ -193,7 +193,7 @@ function App() {
         ) : (
           <small>&nbsp;</small>
         )}
-        <div className="trigger" onClick={showHideForm}>
+        <div className="trigger d-lg-none" onClick={showHideForm}>
           <i className="fa-solid fa-magnifying-glass"></i>
           {tracker ? (
             <i className="fa-solid fa-angles-down ms-2"></i>
@@ -205,7 +205,7 @@ function App() {
 
       {/* Form */}
 
-      <div >
+      <div>
         <Form onSubmit={onSubmit} tracker={tracker} />
       </div>
 
@@ -216,6 +216,7 @@ function App() {
           clearHistory={clearHistory}
           removeHistory={removeHistory}
           fetchWeather={fetchWeather}
+          tracker={tracker}
         />
       </div>
 
