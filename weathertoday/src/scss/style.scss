@@ -26,6 +26,7 @@
 #weather-content {
   background-image: url(../../public/images/landscape.jpeg);
   background-size: cover;
+  background-position: center;
 
   .weather-icon {
     font-size: 6rem;
@@ -136,5 +137,11 @@ footer {
     .table {
       font-size: $base-font-size;
     }
+  }
+}
+
+@media screen and (min-width: 992px) {
+  #weather-content {
+    background-image: url(../../public/images/sunset.jpeg);
   }
 }

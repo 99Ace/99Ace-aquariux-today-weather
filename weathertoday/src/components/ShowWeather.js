@@ -2,7 +2,8 @@ const ShowWeather = (props) => {
   return (
     <section id="weather-content" className="container">
       <div className="row pt-md-5">
-        <div className="col-12 col-md-7">
+        <div className="col-md-5">
+          {/* weather report card */}
           <div className="weather-report ms-auto me-auto me-md-0 my-3 border">
             <div className="row">
               {/* Country detail and main weather forcast */}
@@ -26,6 +27,7 @@ const ShowWeather = (props) => {
                 />
               </div>
             </div>
+            {/* Weather results */}
             <table>
               <tbody>
                 <tr>

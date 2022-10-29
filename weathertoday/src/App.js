@@ -169,7 +169,7 @@ function App() {
   return (
     <div className="wrapper-main">
       {/* Top Banner */}
-      <div className="bg-color-1 p-3 d-flex align-item-center">
+      <div className="container bg-color-1 p-3 d-flex align-item-center">
         <strong>
           WeatherT<i className="fa-solid fa-sun"></i>day
         </strong>
@@ -183,7 +183,7 @@ function App() {
       <div>{<ShowWeather weatherReport={record.weatherReport} />}</div>
 
       {/* Error Display else normal banner */}
-      <div className="text-center py-1 bg-color-1 position-relative">
+      <div className="text-center py-1 bg-color-1 position-relative container">
         {error ? (
           <small className="text-light fst-italic">
             <span className="text-danger">**</span>

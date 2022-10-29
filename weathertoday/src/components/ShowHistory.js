@@ -3,7 +3,7 @@ const ShowHistory = (props) => {
     <>
       <section
         id="weather-history"
-        className={props.tracker ? "container" : "ht-hidecontainer"}
+        className={props.tracker ? "container" : "ht-hide container"}
       >
         <table className="table">
           <thead>
