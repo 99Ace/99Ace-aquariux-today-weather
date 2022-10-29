@@ -35,8 +35,14 @@ Github Code @ https://github.com/99Ace/99Ace-aquariux-weatherToday/tree/main/wea
 
 ## Features
 
+_form search_
+
 - User can search based on city name or country name
 - User can click button or hit enter key to search
+- User can hide/show the search bar when browsing the history
+
+_search history_
+
 - User can view their search history
 - User can use their search history to render a search
 - User can delete one history or clear all history
