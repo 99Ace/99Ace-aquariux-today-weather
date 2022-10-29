@@ -2,44 +2,40 @@
 @import "./node_modules/bootstrap/scss/bootstrap";
 
 @import "./variables";
+
 // Common styling
 .bg-color-1 {
   background-color: $myColor;
 }
+
 .btn {
   border-radius: $base-border-radius;
-  padding: math.div($base-padding,4) $base-padding;
+  padding: math.div($base-padding, 4) $base-padding;
 }
 
-// Form Section
-#weather-search {
-  
-  .weather-form {
-    box-shadow: $base-box-shadow;
-    border-radius: $base-border-radius;
-    padding: $base-padding;
-    .input-group-text {
-      border-radius: $base-border-radius2 0 0 $base-border-radius2
-    }
-    input {
-      border-radius: 0 $base-border-radius2  $base-border-radius2 0
-    }
-  }
+.wrapper-main {
+  max-width: 1200px;
+  margin: 0 auto;
 }
+
+
 
 // Weather Display Section
 #weather-content {
   background-image: url(../../public/images/landscape.jpeg);
   background-size: cover;
+
   .weather-icon {
     font-size: 6rem;
   }
+
   .weather-report {
     width: fit-content;
     background-color: rgba(255, 255, 255, 0.9);
     box-shadow: $base-box-shadow;
     border-radius: $base-border-radius;
     padding: $base-padding;
+
     .flag-icon-main {
       height: $base-height * 2.5;
     }
@@ -50,18 +46,60 @@
   }
 }
 
+// Error Section
+.trigger {
+  color: whitesmoke;
+  position: absolute;
+  top: 50%;
+  right: $base-padding;
+  transform: translateY(-50%);
+}
+
+// Form Section
+#weather-search {
+  .weather-form {
+    box-shadow: $base-box-shadow;
+    border-radius: $base-border-radius;
+    padding: $base-padding;
+
+    .input-group-text {
+      border-radius: $base-border-radius2 0 0 $base-border-radius2
+    }
+
+    input {
+      border-radius: 0 $base-border-radius2 $base-border-radius2 0
+    }
+  }
+
+  .hideForm {
+    height: 0;
+    overflow: hidden;
+  }
+
+  .showForm {
+    height: fit-content;
+  }
+}
+
+
 // Search History Display Section
 #weather-history {
+  min-height: 20vh;
+  padding-bottom: $base-height * 3;
+
   .flag-icon {
     height: $base-height * 1.25;
   }
+
   .table {
     font-size: $base-font-size * 0.9;
+
     .fs-time {
       font-size: $base-font-size * 0.8;
     }
   }
 }
+
 // Footer
 footer {
   height: $base-height * 3;
@@ -69,12 +107,15 @@ footer {
   width: 100%;
   bottom: 0;
 }
+
 @media screen and (min-width: 768px) {
+
   // Weather Display Section
   #weather-content {
     .flag-icon-main {
       height: $base-height * 3;
     }
+
     table {
       font-size: $base-font-size;
     }

@@ -22,7 +22,14 @@ const Form = (props) => {
   };
   return (
     <div id="weather-search" className="container p-2">
-      <form className="weather-form border" onSubmit={handleSubmit}>
+      <form
+        onSubmit={handleSubmit}
+        className={
+          props.tracker
+            ? "hideForm"
+            : "weather-form border p-2 showForm border"
+        }
+      >
         {/* input fields */}
         <div className="d-md-flex justify-content-evenly gap-2">
           {/* Input : City */}
