@@ -72,7 +72,6 @@ function App() {
                     time: getCurrentDate(),
                   },
                 ]);
-            console.log("icon", w.weather[0].icon);
             // save the weather and history
             setRecord({
               ...record,
@@ -84,7 +83,6 @@ function App() {
               username: record.username,
               searchHistory: newSearchHistory,
             };
-            console.log("Added new history=>", userData);
             ReactSession.set("userData", userData);
           }
         })
@@ -92,7 +90,8 @@ function App() {
           throw error;
         });
     } catch (e) {
-      setError(e.toJSON().message);
+      // console.log(e, e.response.status);
+      setError("No result found");
     }
   };
 
@@ -105,7 +104,6 @@ function App() {
   };
 
   const onSubmit = (form) => {
-    console.log("submitted", form);
     // set query including city and country
     var query = "";
     if (form.city.length > 0 && form.country.length > 0) {
@@ -135,7 +133,6 @@ function App() {
     ReactSession.set("userData", userData);
   };
   const removeHistory = (index) => {
-    console.log(index);
     const modifiedSearchHistory = [
       ...record.searchHistory.slice(0, index),
       ...record.searchHistory.slice(index + 1),
@@ -177,7 +174,13 @@ function App() {
       {/* Weather Display */}
       <div>{<ShowWeather weatherReport={record.weatherReport} />}</div>
 
-      <div className="p-3 bg-color-1"></div>
+      <div className="text-center py-1 bg-color-1">
+        {error ? (
+          <small className="text-danger fst-italic">{error}</small>
+        ) : (
+          <small>&nbsp;</small>
+        )}
+      </div>
 
       {/* Form */}
       <div>

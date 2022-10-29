@@ -1,6 +1,4 @@
 const ShowWeather = (props) => {
-  console.log(props);
-
   return (
     <section id="weather-content" className="container">
       <div className="row pt-md-5">
