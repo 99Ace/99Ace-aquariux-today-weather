@@ -6,9 +6,14 @@
 .bg-color-1 {
   background-color: $myColor;
 }
+.btn {
+  border-radius: $base-border-radius;
+  padding: math.div($base-padding,4) $base-padding;
+}
 
 // Form Section
 #weather-search {
+  
   .weather-form {
     box-shadow: $base-box-shadow;
     border-radius: $base-border-radius;
@@ -24,11 +29,14 @@
 
 // Weather Display Section
 #weather-content {
+  background-image: url(../../public/images/landscape.jpeg);
+  background-size: cover;
   .weather-icon {
     font-size: 6rem;
   }
   .weather-report {
     width: fit-content;
+    background-color: rgba(255, 255, 255, 0.9);
     box-shadow: $base-box-shadow;
     border-radius: $base-border-radius;
     padding: $base-padding;

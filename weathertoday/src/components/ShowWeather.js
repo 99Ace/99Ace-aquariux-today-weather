@@ -5,7 +5,7 @@ const ShowWeather = (props) => {
     <section id="weather-content" className="container">
       <div className="row pt-md-5">
         <div className="col-12 col-md-7">
-          <div className="weather-report ms-auto me-auto me-md-0 mt-3 border">
+          <div className="weather-report ms-auto me-auto me-md-0 my-3 border">
             <div className="row">
               {/* Country detail and main weather forcast */}
               <div className="col-8">
@@ -24,7 +24,7 @@ const ShowWeather = (props) => {
                 <img
                   src={`http://openweathermap.org/img/wn/${props.weatherReport.icon}@4x.png`}
                   alt="weather icon"
-                  className="img-fluid rounded-circle border"
+                  className="img-fluid rounded-circle border bg-light"
                 />
               </div>
             </div>

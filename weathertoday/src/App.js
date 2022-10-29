@@ -177,7 +177,7 @@ function App() {
       {/* Weather Display */}
       <div>{<ShowWeather weatherReport={record.weatherReport} />}</div>
 
-      <div className="p-3 bg-color-1 mt-3"></div>
+      <div className="p-3 bg-color-1"></div>
 
       {/* Form */}
       <div>
