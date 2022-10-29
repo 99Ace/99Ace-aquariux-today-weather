@@ -221,7 +221,7 @@ function App() {
       </div>
 
       {/* Footer   */}
-      <footer className="bg-dark text-light p-2">
+      <footer className="container bg-dark text-light p-2">
         <small>
           <em>@99ace-assignment2022</em>
         </small>
