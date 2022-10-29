@@ -38,7 +38,7 @@ const ShowHistory = (props) => {
                       />
                       {i.name}, {i.country}
                     </td>
-                    <td className="text-end">{i.time.slice(11)}</td>
+                    <td className="text-end fs-time">{i.time.slice(11)}</td>
                     <td className="text-end">
                       <button
                         className="btn btn-sm"
@@ -65,7 +65,6 @@ const ShowHistory = (props) => {
           </tbody>
         </table>
       </section>
-      <h1>Show History</h1>
     </>
   );
 };

@@ -1,24 +1,81 @@
+@use "sass:math";
 @import "./node_modules/bootstrap/scss/bootstrap";
-$myColor: rgb(137, 237, 236);
 
-.top-banner {
-  background-color: turquoise;
-}
-
-.weather-icon {
-  font-size: 6rem;
+@import "./variables";
+// Common styling
+.bg-color-1 {
+  background-color: $myColor;
 }
 
-.weather-report {
-  width: fit-content;
+// Form Section
+#weather-search {
+  .weather-form {
+    box-shadow: $base-box-shadow;
+    border-radius: $base-border-radius;
+    padding: $base-padding;
+    .input-group-text {
+      border-radius: $base-border-radius2 0 0 $base-border-radius2
+    }
+    input {
+      border-radius: 0 $base-border-radius2  $base-border-radius2 0
+    }
+  }
 }
 
-.table{
-  font-size: 14px;
+// Weather Display Section
+#weather-content {
+  .weather-icon {
+    font-size: 6rem;
+  }
+  .weather-report {
+    width: fit-content;
+    box-shadow: $base-box-shadow;
+    border-radius: $base-border-radius;
+    padding: $base-padding;
+    .flag-icon-main {
+      height: $base-height * 2.5;
+    }
+  }
+
+  table {
+    font-size: $base-font-size * 0.9;
+  }
 }
-.flag-icon {
-  height: 20px;
+
+// Search History Display Section
+#weather-history {
+  .flag-icon {
+    height: $base-height * 1.25;
+  }
+  .table {
+    font-size: $base-font-size * 0.9;
+    .fs-time {
+      font-size: $base-font-size * 0.8;
+    }
+  }
 }
-.flag-icon-main {
-  height: 30px;
+// Footer
+footer {
+  height: $base-height * 3;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+@media screen and (min-width: 768px) {
+  // Weather Display Section
+  #weather-content {
+    .flag-icon-main {
+      height: $base-height * 3;
+    }
+    table {
+      font-size: $base-font-size;
+    }
+  }
+
+  // Search History Display Section
+  #weather-history {
+    .table {
+      font-size: $base-font-size;
+    }
+  }
 }

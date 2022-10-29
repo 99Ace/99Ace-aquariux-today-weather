@@ -13,10 +13,10 @@ const Form = (props) => {
     });
   };
   return (
-    <div id="weather-search" className="container p-3">
-      <div className="weather-form">
+    <div id="weather-search" className="container p-2">
+      <div className="weather-form border">
         {/* input fields */}
-        <div className="d-flex justify-content-evenly gap-2">
+        <div className="d-md-flex justify-content-evenly gap-2">
           <div className="input-group mb-3">
             <span className="input-group-text" id="city">
               City

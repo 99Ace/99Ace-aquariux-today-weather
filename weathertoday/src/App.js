@@ -38,25 +38,25 @@ function App() {
         .get(url)
         .then((response) => {
           const w = response.data;
-
+          const newWeatherReport = {
+            name: w.name,
+            country: w.sys.country,
+            main: w.weather[0].main,
+            description: w.weather[0].description,
+            temp_min: w.main.temp_min,
+            temp_max: w.main.temp_max,
+            humidity: w.main.humidity,
+            icon: w.weather[0].icon,
+            time: getCurrentDate(),
+          };
           // if user not initialise
           if (!record.username) {
             const userData = ReactSession.get("userData");
-            console.log("retrieve==>", userData);
             // save the weather + history from session
             setRecord({
               ...record,
               username: userData.username,
-              weatherReport: {
-                name: w.name,
-                country: w.sys.country,
-                main: w.weather[0].main,
-                description: w.weather[0].description,
-                temp_min: w.main.temp_min,
-                temp_max: w.main.temp_max,
-                humidity: w.main.humidity,
-                time: getCurrentDate(),
-              },
+              weatherReport: newWeatherReport,
               searchHistory: userData.searchHistory,
             });
           } else {
@@ -72,20 +72,11 @@ function App() {
                     time: getCurrentDate(),
                   },
                 ]);
-
+            console.log("icon", w.weather[0].icon);
             // save the weather and history
             setRecord({
               ...record,
-              weatherReport: {
-                name: w.name,
-                country: w.sys.country,
-                main: w.weather[0].main,
-                description: w.weather[0].description,
-                temp_min: w.main.temp_min,
-                temp_max: w.main.temp_max,
-                humidity: w.main.humidity,
-                time: getCurrentDate(),
-              },
+              weatherReport: newWeatherReport,
               searchHistory: newSearchHistory,
             });
             // save to session
@@ -160,7 +151,6 @@ function App() {
     const query = "singapore";
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${process.env.REACT_APP_API_KEY}&units=metric`;
     var userData = ReactSession.get("userData");
-    console.log(userData);
     if (!userData) {
       userData = {
         username: "Alexander",
@@ -168,14 +158,13 @@ function App() {
       };
       ReactSession.set("userData", userData);
     }
-    console.log(userData);
-
     fetchWeather(url, true);
   }, []);
 
   return (
     <div>
-      <div className="top-banner p-3 d-flex align-item-center">
+      {/* Top Banner */}
+      <div className="bg-color-1 p-3 d-flex align-item-center">
         <strong>
           WeatherT<i className="fa-solid fa-sun"></i>day
         </strong>
@@ -184,15 +173,18 @@ function App() {
           <i className="fa-solid fa-user ms-2"></i>
         </div>
       </div>
+
+      {/* Weather Display */}
+      <div>{<ShowWeather weatherReport={record.weatherReport} />}</div>
+
+      <div className="p-3 bg-color-1 mt-3"></div>
+
+      {/* Form */}
       <div>
         <Form onSubmit={onSubmit} />
       </div>
-      {/* Error message
-      <div>
-        {error && <span className="text-danger fst-italic">{error}</span>}
-      </div> */}
-      <div>{<ShowWeather weatherReport={record.weatherReport} />}</div>
 
+      {/* History Display */}
       <div>
         <ShowHistory
           history={record.searchHistory}
@@ -201,6 +193,13 @@ function App() {
           fetchWeather={fetchWeather}
         />
       </div>
+
+      {/* Footer   */}
+      <footer className="bg-dark text-light p-2">
+        <small>
+          <em>@99ace-assignment2022</em>
+        </small>
+      </footer>
     </div>
   );
 }
