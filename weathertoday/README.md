@@ -1,70 +1,74 @@
-# Getting Started with Create React App
+# **WEATHER TODAY**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Task
 
-## Available Scripts
+To use React to complete the following tasks. If you are unsure about the question, feel free to make all the necessary UI behavior assumptions and state them in a separate document.
 
-In the project directory, you can run:
+### Requirements
 
-### `npm start`
+![Example of UI](./public/images/example.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. Display information at least based on mock up UI.
+2. User can input city and country name to get weather information and display them on UI. Please
+   use AJAX to get weather information from OpenWeatherAPI(https://openweathermap.org/api).
+3. User can find their records in search history, and can click search button to call api again. Can click
+   delete button to remove the record.
+4. If user inputs invalid city or country name, show appropriate message on UI.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Assumptions
 
-### `npm test`
+- Access to current page is based on assumption that user have logged in.\
+  For new browsers, if no existing session,it will auto create a dummy profile to start the program.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#
 
-### `npm run build`
+## Deployed link
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Deployed @ https://99ace-weathertoday.netlify.app \
+Github Code @ https://github.com/99Ace/99Ace-aquariux-weatherToday/tree/main/weathertoday
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Flowchart
 
-### `npm run eject`
+![Diagram of the flow of the website](./public/images/flowchart.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Features
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- User can search based on city name or country name
+- User can click button or hit enter key to search
+- User can view their search history
+- User can use their search history to render a search
+- User can delete one history or clear all history
+- User can view the weather condition, humidity, temperature of the location they search for
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Testing
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+https://validator.w3.org/
 
-## Learn More
+| Tested on                 | Results |
+| ------------------------- | :-----: |
+| https://validator.w3.org/ | Passed  |
+| Iphone Device             | Passed  |
+| Ipad Device               | Passed  |
+| Android Phones            | Passed  |
+| Macbook                   | Passed  |
+| Laptop                    | Passed  |
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## **Technology & Packages**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Node
+- React Js
+- HTML/CSS
+- Bootstrap
+- dotenv
+- craco
+- Sass
 
-### Code Splitting
+## **Credits**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Stackoverflow : https://stackoverflow.com/ - reference from stackoverflow
+- Netlify : https://app.netlify.com/ - hosting the app
+- OpenWeather : https://openweathermap.org/ - API source
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Julius, Yong San - for referring me to this opportunity
